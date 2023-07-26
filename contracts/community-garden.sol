@@ -19,35 +19,98 @@
 pragma solidity ^0.8.7;
 
 
-contract CommunityGarden {
-    address public manager;
-    mapping (uint => address) public gardenPlots;
-    mapping (address => uint) public ownerPlotCount;
+// ============================================================================
+// Contracts
+// ============================================================================
 
+/**
+ * Community Garden Contract
+ * @dev 
+ */
+contract CommunityGarden {
+
+    // Parameters
+    // ========================================================================
+
+    address public manager;
     uint public totalPlots;
     uint public maxPlotsPerPerson;
 
-    event PlotClaimed(uint indexed plot, address indexed newOwner);
-    event PlotReset(uint indexed plot, address indexed previousOwner);
-    
-    constructor(uint _totalPlots, uint _maxPlotsPerPerson) {
-        require(_totalPlots > 0, "Total plots must be greater than zero");
-        require(_maxPlotsPerPerson > 0, "Max plots per person must be greater than zero");
+    // Struct
+    // ========================================================================
+
+
+    // Constructor
+    // ========================================================================
+
+    constructor(
+        uint _totalPlots,
+        uint _maxPlotsPerPerson
+    ) {
+        require(
+            _totalPlots > 0,
+            "Total plots must be greater than zero"
+        );
+        require(
+            _maxPlotsPerPerson > 0,
+            "Max plots per person must be greater than zero"
+        );
         
         manager = msg.sender;
         totalPlots = _totalPlots;
         maxPlotsPerPerson = _maxPlotsPerPerson;
     }
 
-    function claimPlot(uint plot) public {
+
+    // Mappings
+    // ========================================================================
+
+    mapping (uint => address) public gardenPlots;
+    mapping (address => uint) public ownerPlotCount;
+
+
+    // Events
+    // ========================================================================
+
+    event PlotClaimed(
+        uint indexed plot,
+        address indexed newOwner
+    );
+
+    event PlotReset(
+        uint indexed plot,
+        address indexed previousOwner
+    );
+    
+
+    // Methods
+    // ========================================================================
+
+    /**
+     * claimPlot
+     * @param plot plot
+     */
+    function claimPlot(
+        uint plot
+    ) public {
+
         // check if the plot number is valid
-        require(plot < totalPlots, "Invalid plot number");
+        require(
+            plot < totalPlots,
+            "Invalid plot number"
+        );
 
         // check if the plot is not yet claimed
-        require(gardenPlots[plot] == address(0), "Plot already claimed");
+        require(
+            gardenPlots[plot] == address(0),
+            "Plot already claimed"
+        );
 
         // check if the claimer has not reached the max plot count
-        require(ownerPlotCount[msg.sender] < maxPlotsPerPerson, "You have reached your plot limit");
+        require(
+            ownerPlotCount[msg.sender] < maxPlotsPerPerson,
+            "You have reached your plot limit"
+        );
         
         // claim the plot
         gardenPlots[plot] = msg.sender;
@@ -59,13 +122,29 @@ contract CommunityGarden {
         emit PlotClaimed(plot, msg.sender);
     }
 
-    function getPlotOwner(uint plot) public view returns (address) {
+    /**
+     * getPlotOwner
+     * @param plot plot
+     */
+    function getPlotOwner(
+        uint plot
+    ) public view returns (address) {
         return gardenPlots[plot];
     }
 
-    function resetPlot(uint plot) public {
+    /**
+     * resetPlot
+     * @param plot plot
+     */
+    function resetPlot(
+        uint plot
+    ) public {
+
         // only the manager can reset the plot
-        require(msg.sender == manager, "Only the manager can reset the plot");
+        require(
+            msg.sender == manager,
+            "Only the manager can reset the plot"
+        );
         
         // decrease the plot count for the current owner
         address previousOwner = gardenPlots[plot];
@@ -78,20 +157,45 @@ contract CommunityGarden {
         emit PlotReset(plot, previousOwner);
     }
 
-    function changeMaxPlotsPerPerson(uint newMax) public {
+    /**
+     * changeMaxPlotsPerPerson
+     * @param newMax newMax
+     */
+    function changeMaxPlotsPerPerson(
+        uint newMax
+    ) public {
+
         // only the manager can change the max plots per person
-        require(msg.sender == manager, "Only the manager can change the max plots per person");
+        require(
+            msg.sender == manager,
+            "Only the manager can change the max plots per person"
+        );
         
         // change the max plots per person
         maxPlotsPerPerson = newMax;
     }
 
-    function transferPlot(uint plot, address newOwner) public {
+    /**
+     * transferPlot
+     * @param plot plot
+     * @param newOwner newOwner
+     */
+    function transferPlot(
+        uint plot,
+        address newOwner
+    ) public {
+
         // only the current owner or the manager can transfer the plot
-        require(gardenPlots[plot] == msg.sender || msg.sender == manager, "You are not allowed to transfer this plot");
+        require(
+            gardenPlots[plot] == msg.sender || msg.sender == manager,
+            "You are not allowed to transfer this plot"
+        );
 
         // the new owner must not exceed the max plot count
-        require(ownerPlotCount[newOwner] < maxPlotsPerPerson, "The new owner has reached their plot limit");
+        require(
+            ownerPlotCount[newOwner] < maxPlotsPerPerson,
+            "The new owner has reached their plot limit"
+        );
 
         // decrease the plot count for the current owner
         if (gardenPlots[plot] != manager) {
@@ -108,7 +212,14 @@ contract CommunityGarden {
         emit PlotClaimed(plot, newOwner);
     }
 
-    function isPlotAvailable(uint plot) public view returns (bool) {
+    /**
+     * isPlotAvailable
+     * @param plot plot
+     */
+    function isPlotAvailable(
+        uint plot
+    ) public view returns (bool) {
         return gardenPlots[plot] == address(0);
     }
+
 }
