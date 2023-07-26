@@ -37,8 +37,22 @@
 
 <br clear="both"/>
 
+**Welcome to the Community Garden Blockchain Project!**
+
 ## Introduction
 
+In our digital world, we often lose touch with nature and our local communities. This project aims to bridge that gap by combining modern technology with the age-old practice of community gardening. The goal is to create a more sustainable, transparent, and engaged community ecosystem.
+
+Our project utilizes Ethereum blockchain technology and smart contracts to manage the allocation of garden plots within a community garden. Our smart contract, written in Solidity, allows community members to claim, transfer, and manage plots in a decentralized and fair manner.
+
+The Community Garden Blockchain Project features include:
+
+1. Claiming Garden Plots: Community members can claim a vacant garden plot in the community garden.
+2. Ownership Transfer: Garden plots can be transferred from one community member to another.
+3. Manager Oversight: A garden manager has the authority to reset and manage plots.
+4. Decentralized and Transparent: All transactions are recorded on the Ethereum blockchain, providing a transparent record of who owns which plot.
+
+Through this project, we're striving to encourage a sense of community, promote sustainability, and bring the advantages of blockchain technology to everyday life. Whether you're a gardening enthusiast looking to secure your own little corner of green space, or a tech enthusiast interested in practical uses of blockchain technology, we hope you find value in the Community Garden Blockchain Project.
 
 ## Quick Start
 
