@@ -30,6 +30,9 @@ pragma solidity ^0.8.7;
 /// @dev All function calls are currently implemented without side effects.
 contract CommunityGarden {
 
+    // Parameters
+    // ========================================================================
+
     /// @notice The address of the manager of the garden
     address public manager;
 
