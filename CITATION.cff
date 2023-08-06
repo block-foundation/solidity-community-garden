@@ -1,5 +1,6 @@
 cff-version: 1.2.0
-title: solidity-community-garden
+title: Community Garden Smart Contract
+abstract: This software provides a decentralized application built on the Ethereum blockchain for managing community gardens. It uses a smart contract to allocate and manage garden plots in a fair, transparent, and decentralized manner.
 version: 0.0.1
 date-released: 2023-07-01
 url: "https://github.com/block-foundation/solidity-community-garden"
