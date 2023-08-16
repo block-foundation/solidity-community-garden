@@ -36,7 +36,7 @@
 
 </div>
 
-**Welcome to the Community Garden Blockchain Project!**
+**Welcome to the Community Garden Blockchain Project! In our technologically-driven world, there's often a disconnect from the nurturing embrace of nature and the warmth of local communities. This project uniquely combines cutting-edge blockchain technology with the timeless appeal of community gardening. Our goal? A sustainable, transparent, and truly engaged community ecosystem.**
 
 ## Introduction
 
@@ -50,16 +50,54 @@ What's particularly enticing about our endeavor is the immutable and public reco
 
 In essence, this Community Garden contract embodies an innovative blend of modern technology and age-old communal traditions, fostering a symbiotic relationship between the digital and the natural world. Through this initiative, we aspire to demonstrate the untapped potential of blockchain technology in fostering community engagement, promoting ecological sustainability, and driving social innovation. The goal isn't merely to manage a community garden but to cultivate a broader ethos of shared resources, community participation, and sustainable living.
 
-### Features
+## Features
+
+Through this project, we're striving to encourage a sense of community, promote sustainability, and bring the advantages of blockchain technology to everyday life. Whether you're a gardening enthusiast looking to secure your own little corner of green space, or a tech enthusiast interested in practical uses of blockchain technology, we hope you find value in the Community Garden Blockchain Project.
 
 The Community Garden Blockchain Project features include:
 
-1. Claiming Garden Plots: Community members can claim a vacant garden plot in the community garden.
-2. Ownership Transfer: Garden plots can be transferred from one community member to another.
-3. Manager Oversight: A garden manager has the authority to reset and manage plots.
-4. Decentralized and Transparent: All transactions are recorded on the Ethereum blockchain, providing a transparent record of who owns which plot.
+1. **Claim Garden Plots**: Users can claim unclaimed garden plots.
+2. **Transparent Transfer**: Easily transfer plots to other community members.
+3. **Manager Oversight**: Special functions available for the community garden manager.
+4. **Decentralized Validation**: Transactions are validated on the Ethereum network, ensuring full transparency.
 
-Through this project, we're striving to encourage a sense of community, promote sustainability, and bring the advantages of blockchain technology to everyday life. Whether you're a gardening enthusiast looking to secure your own little corner of green space, or a tech enthusiast interested in practical uses of blockchain technology, we hope you find value in the Community Garden Blockchain Project.
+This not only promises a transparent system but also ensures that the age-old ethos of community sharing and gardening thrives in the modern era.
+
+## Setup & Installation
+
+1. **Prerequisites**: Ensure you have [Node.js](https://nodejs.org/), [Truffle](https://www.trufflesuite.com/), and [MetaMask](https://metamask.io/) installed.
+2. Clone this repository:
+
+   ```bash
+   git clone https://github.com/your_username_here/CommunityGardenSmartContract.git
+   ```
+
+3. Navigate to the project directory:
+
+   ```bash
+   cd CommunityGardenSmartContract
+   ```
+
+4. Install dependencies:
+
+   ```bash
+   npm install
+   ```
+
+5. Compile and migrate the smart contracts:
+
+   ```bash
+   truffle compile
+   truffle migrate
+   ```
+
+## Usage
+
+1. Open your browser with MetaMask installed and select the Ropsten Test Network.
+2. Visit [the deployed DApp URL here](your_deployed_dapp_url).
+3. Interact with the contract through the web interface, claim plots, transfer them, or view the current owners.
+
+
 
 ## Quick Start
 
@@ -94,7 +132,6 @@ npm run compile
 | **Rent-to-Own**                   | [**>>>**](https://github.com/block-foundation/solidity-rent-to-own) | [**>>>**](https://github.com/block-foundation/teal-rent-to-own) |
 | **Self-Owning Building**          | [**>>>**](https://github.com/block-foundation/solidity-self-owning-building) | [**>>>**](https://github.com/block-foundation/teal-self-owning-building) |
 | **Smart Home**                    | [**>>>**](https://github.com/block-foundation/solidity-smart-home) | [**>>>**](https://github.com/block-foundation/teal-smart-home) |
-
 
 ---
 
