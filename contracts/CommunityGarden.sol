@@ -23,40 +23,55 @@ pragma solidity ^0.8.7;
 // Contracts
 // ============================================================================
 
-/// Community Garden Contract
-/// @title CommunityGarden
-/// @author Your Name or Organization
-/// @notice This contract represents a community garden where people can claim, transfer, and manage garden plots.
-/// @dev All function calls are currently implemented without side effects.
+/**
+ *  Community Garden Contract
+ *  @title CommunityGarden
+ *  @author Your Name or Organization
+ *  @notice This contract represents a community garden where people can claim,
+ *  transfer, and manage garden plots.
+ *  @dev All function calls are currently implemented without side effects.
+ */
 contract CommunityGarden {
 
     // Parameters
     // ========================================================================
 
-    /// @notice The address of the manager of the garden
+    /**
+     *  @notice The address of the manager of the garden
+     */
     address public manager;
 
-    /// @notice Total number of plots in the community garden
+    /**
+     *  @notice Total number of plots in the community garden
+     */
     uint public totalPlots;
 
-    /// @notice Maximum number of plots that one person can claim
+    /**
+     *  @notice Maximum number of plots that one person can claim
+     */
     uint public maxPlotsPerPerson;
 
-    /// @dev A struct representing a plot in the community garden
+    /**
+     *  @dev A struct representing a plot in the community garden
+     */
     struct Plot {
         address owner;
         string plant;
     }
 
-    /// @dev An array of all plots in the garden
+    /**
+     *  @dev An array of all plots in the garden
+     */
     Plot[] public plots;
 
     // Constructor
     // ========================================================================
 
-    /// @notice Creates a new community garden contract
-    /// @param _totalPlots The total number of plots in the garden
-    /// @param _maxPlotsPerPerson The maximum number of plots a single person can claim
+    /**
+     *  @notice Creates a new community garden contract
+     *  @param _totalPlots The total number of plots in the garden
+     *  @param _maxPlotsPerPerson The maximum number of plots a single person can claim
+     */
     constructor(
         uint _totalPlots,
         uint _maxPlotsPerPerson
@@ -70,41 +85,55 @@ contract CommunityGarden {
             "Max plots per person must be greater than zero"
         );
         
-        /// @dev Set the manager as the account that deploys the contract
+        /**
+         *  @dev Set the manager as the account that deploys the contract
+         */
         manager = msg.sender;
 
-        /// @dev Set the total number of plots
+        /**
+        *  @dev Set the total number of plots
+         */
         totalPlots = _totalPlots;
 
-        /// @dev Set the maximum number of plots per person
+        /**
+        *  @dev Set the maximum number of plots per person
+         */
         maxPlotsPerPerson = _maxPlotsPerPerson;
     }
         // Mappings
     // ========================================================================
 
-    /// @notice Represents the owner of each plot in the garden
-    /// @dev Maps a plot number (uint) to an owner's address
+    /**
+     *  @notice Represents the owner of each plot in the garden
+     *  @dev Maps a plot number (uint) to an owner's address
+     */
     mapping (uint => address) public gardenPlots;
 
-    /// @notice Represents the number of plots owned by each user
-    /// @dev Maps an owner's address to their plot count (uint)
+    /**
+     *  @notice Represents the number of plots owned by each user
+     *  @dev Maps an owner's address to their plot count (uint)
+     */
     mapping (address => uint) public ownerPlotCount;
 
 
     // Events
     // ========================================================================
 
-    /// @notice Event emitted when a plot is claimed
-    /// @param plot The number of the plot that was claimed
-    /// @param newOwner The address of the user who claimed the plot
+    /**
+     *  @notice Event emitted when a plot is claimed
+     *  @param plot The number of the plot that was claimed
+     *  @param newOwner The address of the user who claimed the plot
+     */
     event PlotClaimed(
         uint indexed plot,
         address indexed newOwner
     );
 
-    /// @notice Event emitted when a plot is reset
-    /// @param plot The number of the plot that was reset
-    /// @param previousOwner The address of the user who previously owned the plot
+    /**
+     *  @notice Event emitted when a plot is reset
+     *  @param plot The number of the plot that was reset
+     *  @param previousOwner The address of the user who previously owned the plot
+     */
     event PlotReset(
         uint indexed plot,
         address indexed previousOwner
@@ -115,14 +144,14 @@ contract CommunityGarden {
     // ========================================================================
 
     /**
-    *   @notice Allows a user to claim a plot in the community garden.
-    *   @dev Checks if the plot number is valid, if the plot is unclaimed, and
-    *   if the sender hasn't exceeded their max plot limit.
-    *   The function then assigns the plot to the sender and increments the
-    *   sender's plot count.
-    *   Emits a PlotClaimed event.
-    *   @param plot The number of the plot to claim.
-    */
+     *   @notice Allows a user to claim a plot in the community garden.
+     *   @dev Checks if the plot number is valid, if the plot is unclaimed, and
+     *   if the sender hasn't exceeded their max plot limit.
+     *   The function then assigns the plot to the sender and increments the
+     *   sender's plot count.
+     *   Emits a PlotClaimed event.
+     *   @param plot The number of the plot to claim.
+     */
     function claimPlot(
         uint plot
     ) public {
@@ -156,22 +185,23 @@ contract CommunityGarden {
     }
 
     /**
-    *   @notice Allows a user to check who owns a particular plot.
-    *   @dev Returns the address of the owner of the specified plot.
-    *   @param plot The number of the plot to check.
-    *   @return The address of the owner of the specified plot.
-    */
+     *   @notice Allows a user to check who owns a particular plot.
+     *   @dev Returns the address of the owner of the specified plot.
+     *   @param plot The number of the plot to check.
+     *   @return The address of the owner of the specified plot.
+     */
     function getPlotOwner(
         uint plot
     ) public view returns (address) {
         return gardenPlots[plot];
     }
+
     /**
-    *   @notice Resets a plot, freeing it up to be claimed again.
-    *   @dev Can only be called by the manager. Decreases the previous owner's
-    *   plot count, clears the owner of the plot, and emits a PlotReset event.
-    *   @param plot The number of the plot to reset.
-    */
+     *  @notice Resets a plot, freeing it up to be claimed again.
+     *  @dev Can only be called by the manager. Decreases the previous owner's
+     *  plot count, clears the owner of the plot, and emits a PlotReset event.
+     *  @param plot The number of the plot to reset.
+     */
     function resetPlot(
         uint plot
     ) public {
@@ -194,9 +224,9 @@ contract CommunityGarden {
     }
 
     /**
-     * @notice Changes the maximum number of plots that each person can own.
-     * @dev Can only be called by the manager.
-     * @param newMax The new maximum number of plots per person.
+     *  @notice Changes the maximum number of plots that each person can own.
+     *  @dev Can only be called by the manager.
+     *  @param newMax The new maximum number of plots per person.
      */
     function changeMaxPlotsPerPerson(
         uint newMax
@@ -213,10 +243,13 @@ contract CommunityGarden {
     }
 
     /**
-     * @notice Transfers a plot to a new owner.
-     * @dev Can only be called by the current owner or the manager. Checks if the new owner hasn't exceeded their max plot limit, then decreases the previous owner's plot count, increases the new owner's plot count, changes the owner of the plot, and emits a PlotClaimed event.
-     * @param plot The number of the plot to transfer.
-     * @param newOwner The address of the user to transfer the plot to.
+     *  @notice Transfers a plot to a new owner.
+     *  @dev Can only be called by the current owner or the manager. Checks if
+     *  the new owner hasn't exceeded their max plot limit, then decreases the
+     *  previous owner's plot count, increases the new owner's plot count, 
+     *  changes the owner of the plot, and emits a PlotClaimed event.
+     *  @param plot The number of the plot to transfer.
+     *  @param newOwner The address of the user to transfer the plot to.
      */
     function transferPlot(
         uint plot,
@@ -251,16 +284,15 @@ contract CommunityGarden {
     }
 
     /**
-     * @notice Checks if a plot is available.
-     * @dev A plot is available if it has no current owner.
-     * @param plot The number of the plot to check.
-     * @return A boolean indicating if the plot is available.
+     *  @notice Checks if a plot is available.
+     *  @dev A plot is available if it has no current owner.
+     *  @param plot The number of the plot to check.
+     *  @return A boolean indicating if the plot is available.
      */
     function isPlotAvailable(
         uint plot
     ) public view returns (bool) {
         return gardenPlots[plot] == address(0);
     }
-
 
 }
